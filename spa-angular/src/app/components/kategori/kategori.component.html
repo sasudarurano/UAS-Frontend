@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <!-- Kontainer utama untuk daftar kategori, memberikan margin atas menggunakan kelas Bootstrap "mt-4". -->
+    <h2>Daftar Kategori</h2>
+    <!-- Judul halaman untuk daftar kategori -->
+    
+    <!-- Loader -->
+    <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
+      <!-- Loader ditampilkan jika properti `isLoading` bernilai true -->
+      <div class="spinner-border text-primary" role="status">
+        <!-- Komponen spinner Bootstrap untuk menampilkan animasi loading -->
+        <span class="visually-hidden">Loading...</span>
+        <!-- Teks alternatif untuk pembaca layar, membantu aksesibilitas -->
+      </div>
+    </div>
+  
+    <!-- Data Kategori -->
+    <div class="row" *ngIf="!isLoading">
+      <!-- Row untuk menampung kartu-kartu kategori -->
+      <div class="col-md-4 mb-4" *ngFor="let item of kategori">
+        <!-- Kolom untuk setiap kartu kategori, menggunakan kelas Bootstrap untuk responsivitas -->
+        <div class="card h-100">
+          <!-- Kartu Bootstrap -->
+          <div class="card-body">
+            <!-- Isi kartu -->
+            <h5 class="card-title">{{ item.nama }}</h5>
+            <!-- Judul kartu -->
+            <p class="card-text"><strong>Deskripsi:</strong> {{ item.deskripsi }}</p>
+            <p class="card-text"><strong>Url:</strong> {{ item.url }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ item.status }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

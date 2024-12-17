@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <!-- Kontainer utama untuk daftar penulis, memberikan margin atas menggunakan kelas Bootstrap "mt-4". -->
+    <h2>Daftar Penulis</h2>
+    <!-- Judul halaman untuk daftar penulis -->
+    
+    <!-- Loader -->
+    <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
+      <!-- Loader ditampilkan jika properti `isLoading` bernilai true -->
+      <div class="spinner-border text-primary" role="status">
+        <!-- Komponen spinner Bootstrap untuk menampilkan animasi loading -->
+        <span class="visually-hidden">Loading...</span>
+        <!-- Teks alternatif untuk pembaca layar, membantu aksesibilitas -->
+      </div>
+    </div>
+  
+    <!-- Data Penulis -->
+    <table class="table table-bordered table-striped" *ngIf="!isLoading">
+      <!-- Tabel ditampilkan hanya jika `isLoading` bernilai false -->
+      <thead>
+        <tr>
+          <!-- Baris header tabel -->
+          <th>Nama</th>
+          <th>Email</th>
+          <th>Profil Singkat</th>
+          <th>Foto Profil</th>
+          <th>Status</th>
+          <th>Spesialisasi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of penulis">
+          <!-- Iterasi melalui array `penulis` untuk setiap elemen -->
+          <td>{{ item.nama }}</td>
+          <!-- Menampilkan properti `nama` dari setiap objek dalam array -->
+          <td>{{ item.email }}</td>
+          <td>{{ item.profilSingkat }}</td>
+          <td><img [src]="item.fotoProfil" alt="Foto Profil" class="img-thumbnail" width="50"></td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.spesialisasi }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
