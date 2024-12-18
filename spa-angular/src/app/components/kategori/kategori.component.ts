@@ -60,10 +60,11 @@ export class KategoriComponent implements OnInit {
       this.http.post(this.apiUrl, this.kategoriForm.value).subscribe({
         next: (response) => {
           console.log('Data berhasil ditambahkan:', response);
-          this.getKategori();
-          this.kategoriForm.reset();
+          this.getKategori(); 
+          this.kategoriForm.reset(); 
+          this.kategoriForm.patchValue({ status: 'aktif' }); 
           this.isSubmitting = false;
-          this.closeModal('tambahKategoriModal');
+          this.closeModal('tambahKategoriModal'); 
         },
         error: (err) => {
           console.error('Error menambahkan kategori:', err);

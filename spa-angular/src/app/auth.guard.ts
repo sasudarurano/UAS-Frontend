@@ -1,4 +1,3 @@
-import { CanActivateFn } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
@@ -19,9 +18,5 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/login']);
       return false;
     }
-  
   }
 }
-export const authGuard: CanActivateFn = (route, state) => {
-  return true;
-};

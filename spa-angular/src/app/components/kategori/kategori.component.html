@@ -7,76 +7,47 @@
       </div>
     </div>
   
-    <button
-      type="button"
-      class="btn btn-primary mb-3"
-      data-bs-toggle="modal"
-      data-bs-target="#tambahKategoriModal"
-    >
-      Tambah Kategori
-    </button>
-  
-    <div
-      class="modal fade"
-      id="tambahKategoriModal"
-      tabindex="-1"
-      aria-labelledby="tambahKategoriModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="tambahKategoriModalLabel">
-              Tambah Kategori
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form [formGroup]="kategoriForm" (ngSubmit)="addKategori()">
-              <div class="mb-3">
-                <label for="nama" class="form-label">Nama Kategori</label>
-                <input
-                  id="nama"
-                  type="text"
-                  class="form-control"
-                  formControlName="nama"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <input
-                  id="deskripsi"
-                  type="text"
-                  class="form-control"
-                  formControlName="deskripsi"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="url" class="form-label">URL</label>
-                <input
-                  id="url"
-                  type="text"
-                  class="form-control"
-                  formControlName="url"
-                />
-              </div>
-              <button
-                type="submit"
-                class="btn btn-primary"
-                [disabled]="isSubmitting"
-              >
-                {{ isSubmitting ? "Menyimpan..." : "Tambah Kategori" }}
-              </button>
-            </form>
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahKategoriModal">
+        Tambah Kategori
+      </button>
+    
+      <div class="modal fade" id="tambahKategoriModal" tabindex="-1" aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tambahKategoriModalLabel">Tambah Kategori</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="kategoriForm" (ngSubmit)="addKategori()">
+                <div class="mb-3">
+                  <label for="nama" class="form-label">Nama Kategori</label>
+                  <input id="nama" type="text" class="form-control" formControlName="nama" />
+                </div>
+                <div class="mb-3">
+                  <label for="deskripsi" class="form-label">Deskripsi</label>
+                  <input id="deskripsi" type="text" class="form-control" formControlName="deskripsi" />
+                </div>
+                <div class="mb-3">
+                  <label for="url" class="form-label">URL</label>
+                  <input id="url" type="text" class="form-control" formControlName="url" />
+                </div>
+                <div class="mb-3">
+                  <label for="status" class="form-label">Status</label>
+                  <select id="status" class="form-select" formControlName="status">
+                    <option value="aktif">Aktif</option>
+                    <option value="tidak aktif">Tidak Aktif</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                  {{ isSubmitting ? "Menyimpan..." : "Tambah Kategori" }}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    
   
     <div
       class="modal fade"
