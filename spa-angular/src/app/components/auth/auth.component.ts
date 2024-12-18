@@ -26,7 +26,7 @@ export class AuthComponent {
 
   // Konstruktor untuk injeksi dependensi
   constructor(
-    private fb: FormBuilder,  // Injeksi FormBuilder untuk membuat form
+    private fb: FormBuilder,  // Injeksi FormBuilder untuk membuatx form
     private http: HttpClient,  // Injeksi HttpClient untuk melakukan HTTP request
     private router: Router  // Injeksi Router untuk navigasi halaman setelah login
   ) {

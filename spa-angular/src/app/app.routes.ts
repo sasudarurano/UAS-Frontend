@@ -15,4 +15,4 @@ export const routes: Routes = [
     { path: 'sumber', component: SumberComponent, canActivate: [AuthGuard] }, 
     { path: 'auth', component: AuthComponent },
     { path: '**', redirectTo: 'auth' }, 
-];
+];  
