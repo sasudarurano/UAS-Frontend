@@ -1,1 +1,34 @@
-<p>berita works!</p>
+<div class="container mt-4">
+    <h2>Daftar Berita</h2>
+    
+    <!-- Loader -->
+    <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  
+    <!-- Data Berita -->
+    <table class="table table-bordered table-striped" *ngIf="!isLoading">
+      <thead>
+        <tr>
+          <th>Judul</th>
+          <th>Isi Berita</th>
+          <th>Tanggal Terbit</th>
+          <th>Penulis</th>
+          <th>Status</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of berita">
+          <td>{{ item.judul }}</td>
+          <td>{{ item.isiBerita }}</td>
+          <td>{{ item.tanggalTerbit | date }}</td>
+          <td>{{ item.penulis.nama }}</td>
+          <td>{{ item.status }}</td>
+          <td><a [href]="item.url">{{ item.url }}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

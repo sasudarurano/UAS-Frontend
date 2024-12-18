@@ -1,1 +1,34 @@
-<p>sumber works!</p>
+<div class="container mt-4">
+    <h2>Daftar Sumber</h2>
+    
+    <!-- Loader -->
+    <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  
+    <!-- Data Sumber -->
+    <table class="table table-bordered table-striped" *ngIf="!isLoading">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Jenis Sumber</th>
+          <th>URL Referensi</th>
+          <th>Tanggal Akses</th>
+          <th>Kredibilitas</th>
+          <th>Tanggal Dibuat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of sumber">
+          <td>{{ item.nama }}</td>
+          <td>{{ item.jenisSumber }}</td>
+          <td>{{ item.urlReferensi }}</td>
+          <td>{{ item.tanggalAkses | date }}</td>
+          <td>{{ item.kredibilitas }}</td>
+          <td>{{ item.tanggalDibuat | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
