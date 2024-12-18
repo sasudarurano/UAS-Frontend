@@ -5,14 +5,14 @@ import { PenulisComponent } from './components/penulis/penulis.component';
 import { SumberComponent } from './components/sumber/sumber.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { AuthGuard } from './auth.guard'; // Import AuthGuard with correct casing
+import { authGuard } from './auth.guard'; // Import AuthGuard with correct casing
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'kategori', component: KategoriComponent, canActivate: [AuthGuard] }, 
-    { path: 'berita', component: BeritaComponent, canActivate: [AuthGuard] }, 
-    { path: 'penulis', component: PenulisComponent, canActivate: [AuthGuard] }, 
-    { path: 'sumber', component: SumberComponent, canActivate: [AuthGuard] }, 
+    { path: 'kategori', component: KategoriComponent, canActivate: [authGuard] }, 
+    { path: 'berita', component: BeritaComponent, canActivate: [authGuard] }, 
+    { path: 'penulis', component: PenulisComponent, canActivate: [authGuard] }, 
+    { path: 'sumber', component: SumberComponent, canActivate: [authGuard] }, 
     { path: 'auth', component: AuthComponent },
     { path: '**', redirectTo: 'auth' }, 
 ];
