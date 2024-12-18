@@ -1,24 +1,77 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Berita Winxgs</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/kategori" routerLink="/kategori">Kategori</a>
+        <a 
+          class="nav-link" 
+          routerLink="/kategori" 
+          routerLinkActive="active"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          Kategori
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/berita" routerLink="/berita">Berita</a>
+        <a 
+          class="nav-link" 
+          routerLink="/berita" 
+          routerLinkActive="active"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          Berita
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/penulis" routerLink="/penulis">Penulis</a>
+        <a 
+          class="nav-link" 
+          routerLink="/penulis" 
+          routerLinkActive="active"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          Penulis
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/sumber" routerLink="/sumber">Sumber</a>
+        <a 
+          class="nav-link" 
+          routerLink="/sumber" 
+          routerLinkActive="active"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          Sumber
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/login" routerLink="/login">Login</a>
+        <a 
+          class="nav-link" 
+          routerLink="/login" 
+          routerLinkActive="active"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          Login
+        </a>
       </li>
     </ul>
-  </div>my
+  </div>
 </nav>
 
-<router-outlet></router-outlet>
+<div class="container mt-3">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,41 @@
+<!-- Container utama yang membungkus seluruh form login dengan margin atas 4 -->
+<div class="container mt-4"> 
+    <!-- Judul form login -->
+    <h2>Login</h2>
+  
+    <!-- Formulir yang dihubungkan dengan FormGroup 'authForm' dan akan memanggil 'onAuth()' ketika disubmit -->
+    <form [formGroup]="authForm" (ngSubmit)="onAuth()"> 
+      <!-- Grup input untuk email dengan margin bawah 3 -->
+      <div class="mb-3"> 
+        <!-- Label untuk input email -->
+        <label for="email" class="form-label">Email</label> 
+        <!-- Input untuk email yang terhubung dengan formControl 'email' -->
+        <input
+          id="email" 
+          type="text" 
+          class="form-control"
+          formControlName="email"
+        />
+      </div>
+      
+      <!-- Grup input untuk password dengan margin bawah 3 -->
+      <div class="mb-3"> 
+        <!-- Label untuk input password -->
+        <label for="password" class="form-label">Password</label> 
+        <!-- Input untuk password yang terhubung dengan formControl 'password' -->
+        <input
+          id="password"
+          type="password"  
+          class="form-control"
+          formControlName="password"
+        />
+      </div>
+  
+      <!-- Tombol untuk submit form, dengan status teks yang dinamis tergantung pada variabel 'isSubmitting' -->
+      <button type="submit" class="btn btn-primary"> 
+        <!-- Menampilkan "Login..." jika sedang mengirim data (isSubmitting = true), jika tidak menampilkan "Login" -->
+        {{ isSubmitting ? "Login..." : "Login" }} 
+      </button>
+    </form>
+  </div>
+  

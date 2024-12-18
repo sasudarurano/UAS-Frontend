@@ -1,34 +1,188 @@
 <div class="container mt-4">
-    <!-- Kontainer utama untuk daftar kategori, memberikan margin atas menggunakan kelas Bootstrap "mt-4". -->
     <h2>Daftar Kategori</h2>
-    <!-- Judul halaman untuk daftar kategori -->
-    
-    <!-- Loader -->
+  
     <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
-      <!-- Loader ditampilkan jika properti `isLoading` bernilai true -->
       <div class="spinner-border text-primary" role="status">
-        <!-- Komponen spinner Bootstrap untuk menampilkan animasi loading -->
         <span class="visually-hidden">Loading...</span>
-        <!-- Teks alternatif untuk pembaca layar, membantu aksesibilitas -->
       </div>
     </div>
   
-    <!-- Data Kategori -->
-    <div class="row" *ngIf="!isLoading">
-      <!-- Row untuk menampung kartu-kartu kategori -->
-      <div class="col-md-4 mb-4" *ngFor="let item of kategori">
-        <!-- Kolom untuk setiap kartu kategori, menggunakan kelas Bootstrap untuk responsivitas -->
-        <div class="card h-100">
-          <!-- Kartu Bootstrap -->
-          <div class="card-body">
-            <!-- Isi kartu -->
-            <h5 class="card-title">{{ item.nama }}</h5>
-            <!-- Judul kartu -->
-            <p class="card-text"><strong>Deskripsi:</strong> {{ item.deskripsi }}</p>
-            <p class="card-text"><strong>Url:</strong> {{ item.url }}</p>
-            <p class="card-text"><strong>Status:</strong> {{ item.status }}</p>
+    <button
+      type="button"
+      class="btn btn-primary mb-3"
+      data-bs-toggle="modal"
+      data-bs-target="#tambahKategoriModal"
+    >
+      Tambah Kategori
+    </button>
+  
+    <div
+      class="modal fade"
+      id="tambahKategoriModal"
+      tabindex="-1"
+      aria-labelledby="tambahKategoriModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tambahKategoriModalLabel">
+              Tambah Kategori
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="kategoriForm" (ngSubmit)="addKategori()">
+              <div class="mb-3">
+                <label for="nama" class="form-label">Nama Kategori</label>
+                <input
+                  id="nama"
+                  type="text"
+                  class="form-control"
+                  formControlName="nama"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="deskripsi" class="form-label">Deskripsi</label>
+                <input
+                  id="deskripsi"
+                  type="text"
+                  class="form-control"
+                  formControlName="deskripsi"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="url" class="form-label">URL</label>
+                <input
+                  id="url"
+                  type="text"
+                  class="form-control"
+                  formControlName="url"
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="isSubmitting"
+              >
+                {{ isSubmitting ? "Menyimpan..." : "Tambah Kategori" }}
+              </button>
+            </form>
           </div>
         </div>
       </div>
+    </div>
+  
+    <div
+      class="modal fade"
+      id="editKategoriModal"
+      tabindex="-1"
+      aria-labelledby="editKategoriModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editKategoriModalLabel">
+              Ubah Kategori
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="kategoriForm" (ngSubmit)="updateKategori()">
+              <div class="mb-3">
+                <label for="editNama" class="form-label">Nama Kategori</label>
+                <input
+                  id="editNama"
+                  type="text"
+                  class="form-control"
+                  formControlName="nama"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editDeskripsi" class="form-label">Deskripsi</label>
+                <input
+                  id="editDeskripsi"
+                  type="text"
+                  class="form-control"
+                  formControlName="deskripsi"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editUrl" class="form-label">URL</label>
+                <input
+                  id="editUrl"
+                  type="text"
+                  class="form-control"
+                  formControlName="url"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editStatus" class="form-label">Status</label>
+                <select 
+                  id="editStatus" 
+                  class="form-select" 
+                  formControlName="status"
+                >
+                  <option value="aktif">Aktif</option>
+                  <option value="tidak aktif">Tidak Aktif</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="isSubmitting"
+              >
+                {{ isSubmitting ? "Menyimpan..." : "Ubah Kategori" }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="kategori.length > 0">
+      <div class="row">
+        <div
+          class="col-md-4 mb-3"
+          *ngFor="let item of kategori | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.nama }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.deskripsi }}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.url }}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.status }}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.tanggalDibuat }}</h6>
+              <button
+                type="button"
+                class="btn btn-warning mt-3 me-2"
+                (click)="getKategoriById(item._id)"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger mt-3"
+                (click)="deleteKategori(item._id)"
+              >
+                Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
     </div>
   </div>
