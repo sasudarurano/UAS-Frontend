@@ -1,34 +1,136 @@
 <div class="container mt-4">
-    <h2>Daftar Sumber</h2>
-    
-    <!-- Loader -->
-    <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
+  <h2>Daftar Sumber</h2>
+
+  <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahSumberModal">
+    Tambah Sumber
+  </button>
+
+  <div class="modal fade" id="tambahSumberModal" tabindex="-1" aria-labelledby="tambahSumberModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tambahSumberModalLabel">Tambah Sumber</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="sumberForm" (ngSubmit)="addSumber()">
+            <div class="mb-3">
+              <label for="nama" class="form-label">Nama Sumber</label>
+              <input id="nama" type="text" class="form-control" formControlName="nama" />
+            </div>
+            <div class="mb-3">
+              <label for="jenisSumber" class="form-label">Jenis Sumber</label>
+              <select id="jenisSumber" class="form-select" formControlName="jenisSumber">
+                <option value="Wawancara">Wawancara</option>
+                <option value="Situs Web">Situs Web</option>
+                <option value="Dokumen">Dokumen</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="urlReferensi" class="form-label">URL Referensi</label>
+              <input id="urlReferensi" type="text" class="form-control" formControlName="urlReferensi" />
+            </div>
+            <div class="mb-3">
+              <label for="tanggalAkses" class="form-label">Tanggal Akses</label>
+              <input id="tanggalAkses" type="date" class="form-control" formControlName="tanggalAkses" />
+            </div>
+            <div class="mb-3">
+              <label for="kredibilitas" class="form-label">Kredibilitas</label>
+              <select id="kredibilitas" class="form-select" formControlName="kredibilitas">
+                <option value="Tinggi">Tinggi</option>
+                <option value="Sedang">Sedang</option>
+                <option value="Rendah">Rendah</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+              {{ isSubmitting ? "Menyimpan..." : "Tambah Sumber" }}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  
-    <!-- Data Sumber -->
-    <table class="table table-bordered table-striped" *ngIf="!isLoading">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Jenis Sumber</th>
-          <th>URL Referensi</th>
-          <th>Tanggal Akses</th>
-          <th>Kredibilitas</th>
-          <th>Tanggal Dibuat</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of sumber">
-          <td>{{ item.nama }}</td>
-          <td>{{ item.jenisSumber }}</td>
-          <td>{{ item.urlReferensi }}</td>
-          <td>{{ item.tanggalAkses | date }}</td>
-          <td>{{ item.kredibilitas }}</td>
-          <td>{{ item.tanggalDibuat | date }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
+
+  <div class="modal fade" id="editSumberModal" tabindex="-1" aria-labelledby="editSumberModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editSumberModalLabel">Ubah Sumber</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="sumberForm" (ngSubmit)="updateSumber()">
+           <div class="mb-3">
+              <label for="editNama" class="form-label">Nama Sumber</label>
+              <input id="editNama" type="text" class="form-control" formControlName="nama" />
+            </div>
+            <div class="mb-3">
+              <label for="editJenisSumber" class="form-label">Jenis Sumber</label>
+              <select id="editJenisSumber" class="form-select" formControlName="jenisSumber">
+                <option value="Wawancara">Wawancara</option>
+                <option value="Situs Web">Situs Web</option>
+                <option value="Dokumen">Dokumen</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editUrlReferensi" class="form-label">URL Referensi</label>
+              <input id="editUrlReferensi" type="text" class="form-control" formControlName="urlReferensi" />
+            </div>
+            <div class="mb-3">
+              <label for="editTanggalAkses" class="form-label">Tanggal Akses</label>
+              <input id="editTanggalAkses" type="date" class="form-control" formControlName="tanggalAkses" />
+            </div>
+            <div class="mb-3">
+              <label for="editKredibilitas" class="form-label">Kredibilitas</label>
+              <select id="editKredibilitas" class="form-select" formControlName="kredibilitas">
+                <option value="Tinggi">Tinggi</option>
+                <option value="Sedang">Sedang</option>
+                <option value="Rendah">Rendah</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+              {{ isSubmitting ? "Menyimpan..." : "Ubah Sumber" }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="sumber.length > 0; else noSumber">
+    <div class="row">
+      <div class="col-md-4 mb-3" *ngFor="let item of sumber | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.nama }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Jenis: {{ item.jenisSumber }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">URL: {{ item.urlReferensi }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Tanggal Akses: {{ item.tanggalAkses | date }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Kredibilitas: {{ item.kredibilitas }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Tanggal Dibuat: {{ item.tanggalDibuat | date }}</h6>
+            <button type="button" class="btn btn-warning mt-3 me-2" (click)="getSumberById(item._id)">
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger mt-3" (click)="deleteSumber(item._id)">
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+
+  <ng-template #noSumber>
+    <p *ngIf="!isLoading">Tidak ada sumber ditemukan.</p>
+  </ng-template>
+</div>

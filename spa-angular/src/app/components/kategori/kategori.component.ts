@@ -57,7 +57,11 @@ export class KategoriComponent implements OnInit {
   addKategori(): void {
     if (this.kategoriForm.valid) {
       this.isSubmitting = true;
-      this.http.post(this.apiUrl, this.kategoriForm.value).subscribe({
+
+      const token= localStorage.getItem('authToken');
+      const headers={ Authorization: `Bearer ${token}` };
+
+      this.http.post(this.apiUrl, this.kategoriForm.value,{headers}).subscribe({
         next: (response) => {
           console.log('Data berhasil ditambahkan:', response);
           this.getKategori(); 
@@ -76,7 +80,12 @@ export class KategoriComponent implements OnInit {
 
   deleteKategori(_id: string): void {
     if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-      this.http.delete(`${this.apiUrl}/${_id}`).subscribe({
+
+      const token = localStorage.getItem('authToken');
+      const headers={ Authorization: `Bearer ${token}` };
+      
+
+      this.http.delete(`${this.apiUrl}/${_id}`,{ headers }).subscribe({
         next: () => {
           console.log(`Kategori dengan ID ${_id} berhasil dihapus`);
           this.getKategori();
@@ -109,7 +118,12 @@ export class KategoriComponent implements OnInit {
   updateKategori(): void {
     if (this.kategoriForm.valid) {
       this.isSubmitting = true;
-      this.http.put(`${this.apiUrl}/${this.editKategoriId}`, this.kategoriForm.value).subscribe({
+
+      const token= localStorage.getItem('authToken');
+      const headers={ Authorization: `Bearer ${token}` };
+
+
+      this.http.put(`${this.apiUrl}/${this.editKategoriId}`, this.kategoriForm.value, {headers}).subscribe({
         next: (response) => {
           console.log('Kategori berhasil diperbarui:', response);
           this.getKategori();
