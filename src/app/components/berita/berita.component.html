@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2>Daftar Berita</h2>
+  <h2 class="text-center">Daftar Berita</h2>
 
   <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
     <div class="spinner-border text-primary" role="status">
@@ -7,12 +7,14 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahBeritaModal">
-    Tambah Berita
-  </button>
+  <div class="d-flex justify-content-end mb-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahBeritaModal">
+      Tambah Berita
+    </button>
+  </div>
 
   <div class="modal fade" id="tambahBeritaModal" tabindex="-1" aria-labelledby="tambahBeritaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> 
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="tambahBeritaModalLabel">Tambah Berita</h5>
@@ -35,7 +37,7 @@
             <div class="mb-3">
               <label for="penulis" class="form-label">Penulis</label>
               <select id="penulis" class="form-select" formControlName="penulis">
-                <option *ngFor="let penulis of penulis" [value]="penulis._id">{{ penulis.nama }}</option> 
+                <option *ngFor="let penulis of penulis" [value]="penulis._id">{{ penulis.nama }}</option>
               </select>
             </div>
             <div class="mb-3">
@@ -57,13 +59,13 @@
             <div class="mb-3">
               <label for="kategori" class="form-label">Kategori</label>
               <select id="kategori" class="form-select" formControlName="kategori">
-                <option *ngFor="let kategori of kategori" [value]="kategori._id">{{ kategori.nama }}</option> 
+                <option *ngFor="let kategori of kategori" [value]="kategori._id">{{ kategori.nama }}</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="sumber" class="form-label">Sumber</label>
-              <select id="sumber" class="form-select" formControlName="sumber" multiple> 
-                <option *ngFor="let sumber of sumber" [value]="sumber._id">{{ sumber.nama }}</option> 
+              <select id="sumber" class="form-select" formControlName="sumber" multiple>
+                <option *ngFor="let sumber of sumber" [value]="sumber._id">{{ sumber.nama }}</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
@@ -99,7 +101,7 @@
             <div class="mb-3">
               <label for="editPenulis" class="form-label">Penulis</label>
               <select id="editPenulis" class="form-select" formControlName="penulis">
-                <option *ngFor="let penulis of penulis" [value]="penulis._id">{{ penulis.nama }}</option> 
+                <option *ngFor="let penulis of penulis" [value]="penulis._id">{{ penulis.nama }}</option>
               </select>
             </div>
             <div class="mb-3">
@@ -121,13 +123,13 @@
             <div class="mb-3">
               <label for="editKategori" class="form-label">Kategori</label>
               <select id="editKategori" class="form-select" formControlName="kategori">
-                <option *ngFor="let kategori of kategori" [value]="kategori._id">{{ kategori.nama }}</option> 
+                <option *ngFor="let kategori of kategori" [value]="kategori._id">{{ kategori.nama }}</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="editSumber" class="form-label">Sumber</label>
-              <select id="editSumber" class="form-select" formControlName="sumber" multiple> 
-                <option *ngFor="let sumber of sumber" [value]="sumber._id">{{ sumber.nama }}</option> 
+              <select id="editSumber" class="form-select" formControlName="sumber" multiple>
+                <option *ngFor="let sumber of sumber" [value]="sumber._id">{{ sumber.nama }}</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
@@ -142,31 +144,36 @@
   <div *ngIf="berita.length > 0; else noBerita">
     <div class="row">
       <div class="col-md-4 mb-3" *ngFor="let item of berita | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
-        <div class="card">
+        <div class="card h-100">
+          <img [src]="item.gambarUtama" class="card-img-top" alt="{{ item.judul }}">
           <div class="card-body">
             <h5 class="card-title">{{ item.judul }}</h5>
-            <p class="card-text">{{ item.isiBerita | slice:0:100 }}...</p> 
+            <p class="card-text">{{ item.isiBerita | slice:0:100 }}...</p>
             <p class="card-text">
               <small class="text-muted">Tanggal Terbit: {{ item.tanggalTerbit | date }}</small>
             </p>
             <p class="card-text">
               <small class="text-muted">Penulis: {{ item.penulis.nama }}</small>
             </p>
-            <button type="button" class="btn btn-warning me-2" (click)="getBeritaById(item._id)">
-              Edit
-            </button>
-            <button type="button" class="btn btn-danger" (click)="deleteBerita(item._id)">
-              Hapus
-            </button>
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-warning me-2" (click)="getBeritaById(item._id)">
+                Edit
+              </button>
+              <button type="button" class="btn btn-danger" (click)="deleteBerita(item._id)">
+                Hapus
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <div class="d-flex justify-content-center mt-4">
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
   </div>
 
   <ng-template #noBerita>
-    <p *ngIf="!isLoading">Tidak ada berita ditemukan.</p>
+    <p class="text-center" *ngIf="!isLoading">Tidak ada berita ditemukan.</p>
   </ng-template>
 </div>

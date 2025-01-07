@@ -1,0 +1,9 @@
+link vercel backend (express)
+https://uas-backend-iota.vercel.app
+
+link vercel frontend (angular)
+https://uas-frontend-eta.vercel.app
+
+login:
+admin@test.com
+password: 123123

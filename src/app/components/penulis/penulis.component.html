@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2>Daftar Penulis</h2>
+  <h2 class="text-center">Daftar Penulis</h2>
 
   <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
     <div class="spinner-border text-primary" role="status">
@@ -7,9 +7,11 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahPenulisModal">
-    Tambah Penulis
-  </button>
+  <div class="d-flex justify-content-end mb-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPenulisModal">
+      Tambah Penulis
+    </button>
+  </div>
 
   <div class="modal fade" id="tambahPenulisModal" tabindex="-1" aria-labelledby="tambahPenulisModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -47,7 +49,7 @@
                 <option value="tidak aktif">Tidak Aktif</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting">
               {{ isSubmitting ? "Menyimpan..." : "Tambah Penulis" }}
             </button>
           </form>
@@ -92,7 +94,7 @@
                 <option value="tidak aktif">Tidak Aktif</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting">
               {{ isSubmitting ? "Menyimpan..." : "Ubah Penulis" }}
             </button>
           </form>
@@ -104,18 +106,20 @@
   <div *ngIf="penulis.length > 0">
     <div class="row">
       <div class="col-md-4 mb-3" *ngFor="let item of penulis | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
-        <div class="card">
+        <div class="card h-100">
+          <img [src]="item.fotoProfil" alt="Foto Profil" class="card-img-top img-thumbnail">
           <div class="card-body">
             <h5 class="card-title">{{ item.nama }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Email: {{ item.email }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Profil Singkat: {{ item.profilSingkat }}</h6>
-            <img [src]="item.fotoProfil" alt="Foto Profil" class="img-thumbnail" width="100">
-            <h6 class="card-subtitle mb-2 text-muted">Spesialisasi: {{ item.spesialisasi }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Status: {{ item.status }}</h6>
-            <button type="button" class="btn btn-warning mt-3 me-2" (click)="getPenulisById(item._id)">
+            <p class="card-text"><strong>Email:</strong> {{ item.email }}</p>
+            <p class="card-text"><strong>Profil Singkat:</strong> {{ item.profilSingkat }}</p>
+            <p class="card-text"><strong>Spesialisasi:</strong> {{ item.spesialisasi }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ item.status }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-warning" (click)="getPenulisById(item._id)">
               Edit
             </button>
-            <button type="button" class="btn btn-danger mt-3" (click)="deletePenulis(item._id)">
+            <button type="button" class="btn btn-danger" (click)="deletePenulis(item._id)">
               Hapus
             </button>
           </div>
@@ -123,6 +127,8 @@
       </div>
     </div>
 
-    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <div class="d-flex justify-content-center mt-4">
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
   </div>
 </div>
